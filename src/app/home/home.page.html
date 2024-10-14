@@ -1,20 +1,19 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+<ion-header>
+<ion-toolbar>
+<ion-title>Time Registration</ion-title>
+</ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content>
+<form (submit)="submitWeek()">
+<ion-item>
+<ion-label>Start Date</ion-label>
+<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="startDate" name="startDate"></ion-datetime>
+</ion-item>
+<ion-item *ngFor="let day of days">
+<ion-label>{{ day }}</ion-label>
+<ion-input type="number" [(ngModel)]="timeEntries[day]" name="time-{{ day }}" placeholder="Hours"></ion-input>
+</ion-item>
+<ion-button expand="full" type="submit" [disabled]="weekLocked">Submit Time</ion-button>
+</form>
+<ion-button expand="full" color="danger" (click)="clearEntries()">Clear All Entries</ion-button>
 </ion-content>
